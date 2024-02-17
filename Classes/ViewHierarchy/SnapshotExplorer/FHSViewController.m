@@ -81,29 +81,29 @@ BOOL const kFHSViewControllerExcludeFLEXWindows = YES;
 
 - (void)refreshSnapshotView {
     // Alert view to block interaction while we load everything
-    UIAlertController *loading = [FLEXAlert makeAlert:^(FLEXAlert *make) {
-        make.title(@"Please Wait").message(@"Generating snapshot…");
-    }];
-    [self presentViewController:loading animated:YES completion:^{
-        self.snapshots = [self.views flex_mapped:^id(FHSView *view, NSUInteger idx) {
-            return [FHSViewSnapshot snapshotWithView:view];
-        }];
-        FHSSnapshotView *newSnapshotView = [FHSSnapshotView delegate:self];
+    // UIAlertController *loading = [FLEXAlert makeAlert:^(FLEXAlert *make) {
+    //     make.title(@"Please Wait").message(@"Generating snapshot…");
+    // }];
+    // [self presentViewController:loading animated:YES completion:^{
+    //     self.snapshots = [self.views flex_mapped:^id(FHSView *view, NSUInteger idx) {
+    //         return [FHSViewSnapshot snapshotWithView:view];
+    //     }];
+    //     FHSSnapshotView *newSnapshotView = [FHSSnapshotView delegate:self];
 
-        // This work is highly intensive so we do it on a background thread first
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            // Setting the snapshots computes lots of SCNNodes, takes several seconds
-            newSnapshotView.snapshots = self.snapshots;
+    //     // This work is highly intensive so we do it on a background thread first
+    //     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    //         // Setting the snapshots computes lots of SCNNodes, takes several seconds
+    //         newSnapshotView.snapshots = self.snapshots;
 
-            // After we finish generating all the model objects and scene nodes, display the view
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // Dismiss alert
-                [loading dismissViewControllerAnimated:YES completion:nil];
+    //         // After we finish generating all the model objects and scene nodes, display the view
+    //         dispatch_async(dispatch_get_main_queue(), ^{
+    //             // Dismiss alert
+    //             [loading dismissViewControllerAnimated:YES completion:nil];
 
-                self.snapshotView = newSnapshotView;
-            });
-        });
-    }];
+    //             self.snapshotView = newSnapshotView;
+    //         });
+    //     });
+    // }];
 }
 
 
