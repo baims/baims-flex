@@ -71,9 +71,11 @@ typedef NS_ENUM(NSUInteger, FLEXHierarchyViewMode) {
     [super viewDidLoad];
 
     // 3D toggle button
+    /*
     self.treeViewController.navigationItem.leftBarButtonItem = [UIBarButtonItem
         flex_itemWithImage:FLEXResources.toggle3DIcon target:self action:@selector(toggleHierarchyMode)
     ];
+    */
 
     // Dismiss when tree view row is selected
     __weak id<FLEXHierarchyDelegate> delegate = self.hierarchyDelegate;
